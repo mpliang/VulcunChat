@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.1",
+    "bower": "^1.7.0",
     "chance": "^0.8.0",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
