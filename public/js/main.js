@@ -1,11 +1,11 @@
 'use strict';
 
-let socket = io.connect('VulcunChat-dev.elasticbeanstalk.com');
+let socket = io.connect('https://vulcun-chat.herokuapp.com/');
 let app = angular.module('chatApp', ['btford.socket-io']);
 let dictionary;
 
 app.factory('socket', (socketFactory) => {
-  let socket = io.connect('VulcunChat-dev.elasticbeanstalk.com');
+  let socket = io.connect('https://vulcun-chat.herokuapp.com/');
   return socketFactory({
     ioSocket: socket
   });
