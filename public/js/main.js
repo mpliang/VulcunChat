@@ -56,7 +56,6 @@ app.factory('socket', (socketFactory) => {
       let newMessage = {};
       newMessage.text = $filter('censor')($scope.message);
       newMessage.name = $scope.name;
-      console.log(newMessage);
       socket.emit('newMessage', newMessage);
       $scope.message = '';
     }

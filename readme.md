@@ -1,10 +1,8 @@
 # Socket Chat Express Backend
 
-#### Features
+## How to use
 ```
-to run locally:
-1. Dynamically generates a list of censored words
-2. Sends 1000 random messages from random users every 5 seconds
+View the app here: http://vulcunchat-dev.elasticbeanstalk.com/
 ```
 
 #### Languages used:

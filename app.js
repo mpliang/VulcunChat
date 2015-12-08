@@ -47,7 +47,7 @@ io.on('connection', (socket) => {
 
   let randomMessages = () => {
     let msg = [];
-    for (let i=0; i<100; i++){
+    for (let i=0; i<1000; i++){
       msg.push({
         text: `${randomWords({min:3, max: 10, join: ' '})}.`,
         name: `${chance.first()} ${chance.last()}`
