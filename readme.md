@@ -2,8 +2,12 @@
 
 ## How to use
 ```
-View the app here: http://vulcunchat-dev.elasticbeanstalk.com/
+View the app here: https://vulcun-chat.herokuapp.com/
 ```
+### Updates
+
+removed AWS EB, socket.io was not working well with that
+changed number of random messages to 100 so lessen server load
 
 #### Languages used:
 ```
