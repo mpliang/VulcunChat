@@ -6,8 +6,8 @@ View the app here: https://vulcun-chat.herokuapp.com/
 ```
 ### Updates
 
-removed AWS EB, socket.io was not working well with that
-changed number of random messages to 100 so lessen server load
+1. removed AWS EB, socket.io was not working well with that
+2. changed number of random messages to 100 so lessen server load
 
 #### Languages used:
 ```
