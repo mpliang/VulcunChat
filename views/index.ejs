@@ -13,12 +13,9 @@
     <div class="chatApp">
       <div class="appContainer">
         <h1>simple chat app</h1>
-        <form ng-submit="newMessage()">
-          <input autofocus class="text" id="location" ng-model="message" placeholder="Enter a new message" type="text" autocomplete="off">
-        </form>
       </div>
       <section id="main" ng-cloak ng-show="messages.length">
-        <ul id="message-list">
+        <ul id="message-list" scroll-bottom="messages">
           <li ng-repeat="message in messages track by $index" ng-cloak>
             <div class="view">
 
@@ -30,6 +27,9 @@
           </li>
         </ul>
       </section>
+      <form ng-submit="newMessage()">
+        <input autofocus class="text" id="location" ng-model="message" placeholder="Enter a new message" type="text" autocomplete="off">
+      </form>
     </div>
 
     <script src="vendor/jquery/dist/jquery.min.js"></script>

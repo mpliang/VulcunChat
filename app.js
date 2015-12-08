@@ -37,13 +37,13 @@ io.on('connection', function(socket) {
   socket.emit('history', history);
 
   socket.on('newMessage', function(message) {
-    history.unshift(message);
+    history.push(message);
     io.emit('message', message);
   });
 
   setInterval(function(){
     let newMessages = randomMessages();
-    history = newMessages.concat(history);
+    history = history.concat(newMessages);
     socket.emit('history', history)
   },5000);
 
@@ -54,7 +54,7 @@ io.on('connection', function(socket) {
 
   let randomMessages = () => {
     let msg = [];
-    for (let i=0; i<1; i++){
+    for (let i=0; i<5; i++){
       msg.push({
         text: `${randomWords({min:3, max: 10, join: ' '})}.`,
         name: `${chance.first()} ${chance.last()}`
