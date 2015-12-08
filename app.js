@@ -25,13 +25,14 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+var history = [];
 
 app.get('/', (req, res) => {
+  console.log('history cleared', history);
   res.render('index');
 });
 
 app.get('/randomWords', (req, res) => res.send(randomWords(100)))
-var history = [];
 
 app.get('/messages', (req, res) => res.send(history));
 
@@ -47,6 +48,10 @@ io.on('connection', (socket) => {
     history = history.concat(newMessages);
     socket.emit('history', history)
   }, 5000);
+
+  setInterval( ()=> {
+    history = [];
+  }, 30000);
 
 
 
