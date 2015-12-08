@@ -1,10 +1,10 @@
 # Socket Chat Express Backend
 
-#### Setup
+#### Features
 ```
 to run locally:
-1. npm run setup
-2. nodemon
+1. Dynamically generates a list of censored words
+2. Sends 1000 random messages from random users every 5 seconds
 ```
 
 #### Languages used:

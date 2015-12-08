@@ -24,37 +24,30 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 
-app.get('/', function (req, res) {
-  res.render('index');
-});
+app.get('/', (req, res) => res.render('index') );
 
-app.get('/randomWords', (req, res) => {
-  res.send(randomWords(100));
-})
+app.get('/randomWords', (req, res) => res.send(randomWords(100)) )
 var history = [];
 
-io.on('connection', function(socket) {
-  socket.emit('history', history);
+app.get('/messages', (req, res) => res.send(history) );
 
-  socket.on('newMessage', function(message) {
+io.on('connection', (socket) => {
+  socket.emit('history', history);
+  socket.on('newMessage', (message) => {
     history.push(message);
     io.emit('message', message);
   });
 
-  setInterval(function(){
+  setInterval( () => {
     let newMessages = randomMessages();
     history = history.concat(newMessages);
     socket.emit('history', history)
   },5000);
 
-  // (()=> {
-  //   console.log(randomWords(100));
-  // })()
-
 
   let randomMessages = () => {
     let msg = [];
-    for (let i=0; i<5; i++){
+    for (let i=0; i<100; i++){
       msg.push({
         text: `${randomWords({min:3, max: 10, join: ' '})}.`,
         name: `${chance.first()} ${chance.last()}`
