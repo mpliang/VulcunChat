@@ -1,0 +1,22 @@
+{
+  "name": "socket-chat-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "setup": "rm -rf node_modules public/vendor && npm i && bower i"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "chance": "^0.8.0",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "morgan": "^1.6.1",
+    "r": "0.0.5",
+    "random-words": "0.0.1",
+    "socket.io": "^1.3.7"
+  }
+}
