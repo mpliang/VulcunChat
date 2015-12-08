@@ -4,10 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "setup": "rm -rf node_modules public/vendor && npm i && bower i"
+    "setup": "rm -rf node_modules public/vendor && npm i && bower i",
+    "postinstall": "bower install"
   },
   "keywords": [],
-  "author": "",
+  "author": "Michael Liang",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.1",
