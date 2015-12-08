@@ -19,17 +19,22 @@ var randomWords = require('random-words');
 app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded( {extended: true} ));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
 
-app.get('/', (req, res) => res.render('index') );
+app.get('/', (req, res) => {
+  start();
+  res.render('index');
+});
 
-app.get('/randomWords', (req, res) => res.send(randomWords(100)) )
+app.get('/randomWords', (req, res) => res.send(randomWords(100)))
 var history = [];
 
-app.get('/messages', (req, res) => res.send(history) );
+app.get('/messages', (req, res) => res.send(history));
 
 io.on('connection', (socket) => {
   socket.emit('history', history);
@@ -38,16 +43,18 @@ io.on('connection', (socket) => {
     io.emit('message', message);
   });
 
-  setInterval( () => {
-    let newMessages = randomMessages();
-    history = history.concat(newMessages);
-    socket.emit('history', history)
-  },5000);
+  let start = () => {
+    setInterval(() => {
+      let newMessages = randomMessages();
+      history = history.concat(newMessages);
+      socket.emit('history', history)
+    }, 5000);
+  }
 
 
   let randomMessages = () => {
     let msg = [];
-    for (let i=0; i<1000; i++){
+    for (let i = 0; i < 100; i++) {
       msg.push({
         text: `${randomWords({min:3, max: 10, join: ' '})}.`,
         name: `${chance.first()} ${chance.last()}`

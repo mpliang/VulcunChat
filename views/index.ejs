@@ -16,6 +16,9 @@
       </div>
       <section id="main" ng-cloak ng-show="messages.length">
         <ul id="message-list" scroll-bottom="messages">
+          <li ng-if="!messages" ng-cloak>
+            Loading messages from the server, please wait...
+          </li>
           <li ng-repeat="message in messages track by $index" ng-cloak>
             <div class="view">
 
