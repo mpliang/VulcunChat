@@ -27,7 +27,6 @@ app.use(express.static('public'));
 
 
 app.get('/', (req, res) => {
-  start();
   res.render('index');
 });
 
@@ -43,7 +42,7 @@ io.on('connection', (socket) => {
     io.emit('message', message);
   });
 
-  let start = () => {
+  () => {
     setInterval(() => {
       let newMessages = randomMessages();
       history = history.concat(newMessages);
