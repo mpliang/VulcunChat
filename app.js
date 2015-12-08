@@ -42,13 +42,12 @@ io.on('connection', (socket) => {
     io.emit('message', message);
   });
 
-  () => {
-    setInterval(() => {
-      let newMessages = randomMessages();
-      history = history.concat(newMessages);
-      socket.emit('history', history)
-    }, 5000);
-  }
+  setInterval(() => {
+    let newMessages = randomMessages();
+    history = history.concat(newMessages);
+    socket.emit('history', history)
+  }, 5000);
+
 
 
   let randomMessages = () => {
