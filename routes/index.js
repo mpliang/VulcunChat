@@ -13,7 +13,6 @@ var User = require('../models/User');
 var randomWords = require('random-words');
 
 
-
 router.get('/', (req, res) => {
   res.render('index');
 });
