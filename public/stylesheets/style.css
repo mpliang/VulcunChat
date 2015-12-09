@@ -59,6 +59,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.loading {
+  font-size: 20px;
+  padding-top: 30px;
+  height: 80px;
+  text-align: center;
+}
+
 .appContainer {
   text-align: center;
 }
