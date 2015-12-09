@@ -18,33 +18,33 @@ router.get('/', (req, res) => {
 });
 
 router.get('/users', (req, res) => {
-  User.find({}, (err,data) => {
+  User.find({}, (err, data) => {
     console.log(data.length);
     res.json(data.length);
   })
 });
 
 router.get('/addData', (req, res, next) => {
-  let users = [];
-  async.series([
-      function (callback) {
-        for (var i = 0; i < 10000000; i++) {
-          var user = new User({
-            full_name: `${chance.first()} ${chance.last()}`,
-            email: chance.email(),
-            city: chance.city()
-          });
-          users.push(user);
-        }
-        callback(null, users);
+  async.timesSeries(200, (n, next) => {
+    console.log('n:', n);
+
+    var users = [];
+    for (var i = 0; i < 50000; i++) {
+      var user = {};
+      user.full_name = `${chance.first()} ${chance.last()}`;
+      user.email = chance.email();
+      user.city = chance.city();
+      users.push(user);
+    }
+
+    User.create(users, (err, saved) => {
+      if (err) {
+        console.log('err:', err);
+        return next(err);
       }
-    ],
-    function (err, results) {
-      console.log('done:', results);
-      User.create(users, (err, data) => {
-        res.json(data.length);
-      })
+      next();
     });
+  })
 });
 
 
