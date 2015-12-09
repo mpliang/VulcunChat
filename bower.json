@@ -1,7 +1,6 @@
 {
   "name": "socket-chat-express",
   "description": "",
-  "main": "app.js",
   "authors": [
     "Michael Liang <michaelpliang@gmail.com>"
   ],

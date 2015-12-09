@@ -1,70 +1,64 @@
-'use strict';
-
-var PORT = process.env.PORT || 3000;
-
 var express = require('express');
-var http = require('http');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var morgan = require('morgan');
 
 var app = express();
-var server = http.Server(app);
 
-var io = require('socket.io')(server);
-var Chance = require('chance');
-var chance = new Chance();
-var randomWords = require('random-words');
-
-
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-var history = [];
-
-app.get('/', (req, res) => {
-  console.log('history cleared', history);
-  res.render('index');
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  next();
 });
 
-app.get('/randomWords', (req, res) => res.send(randomWords(100)))
+app.use('/', require('./routes/index'));
 
-app.get('/messages', (req, res) => res.send(history));
 
-io.on('connection', (socket) => {
-  socket.emit('history', history);
-  socket.on('newMessage', (message) => {
-    history.push(message);
-    io.emit('message', message);
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
   });
+}
 
-  setInterval(() => {
-    let newMessages = randomMessages();
-    history = history.concat(newMessages);
-    socket.emit('history', history)
-  }, 5000);
-
-  setInterval( ()=> {
-    history = [];
-  }, 30000);
-
-
-
-  let randomMessages = () => {
-    let msg = [];
-    for (let i = 0; i < 100; i++) {
-      msg.push({
-        text: `${randomWords({min:3, max: 10, join: ' '})}.`,
-        name: `${chance.first()} ${chance.last()}`
-      });
-    }
-    return msg;
-  }
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
-server.listen(PORT);
+
+module.exports = app;

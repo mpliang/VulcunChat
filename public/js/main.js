@@ -1,11 +1,16 @@
 'use strict';
 
-let socket = io.connect('https://vulcun-chat.herokuapp.com/');
+
+// let url = 'https://vulcun-chat.herokuapp.com/';
+let url = 'http://localhost:3000'
+
+let socket = io.connect(url);
 let app = angular.module('chatApp', ['btford.socket-io']);
 let dictionary;
 
+
 app.factory('socket', (socketFactory) => {
-  let socket = io.connect('https://vulcun-chat.herokuapp.com/');
+  let socket = io.connect(url);
   return socketFactory({
     ioSocket: socket
   });
