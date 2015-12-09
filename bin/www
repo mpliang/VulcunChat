@@ -9,7 +9,7 @@ var debug = require('debug')('heroku:server');
 var http = require('http');
 
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/vulcun-chat');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/vulcun-chat');
 
 
 /**

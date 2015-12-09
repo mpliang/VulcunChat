@@ -4,12 +4,15 @@ var express = require('express');
 var http = require('http');
 var async = require('async');
 var router = express.Router();
-var server = http.Server(router);
+var app = express();
+var server = http.Server(app);
 var io = require('socket.io')(server);
 var Chance = require('chance');
 var chance = new Chance();
 var randomWords = require('random-words');
 var User = require('../models/User');
+
+
 var history = [];
 
 router.get('/', (req, res) => {
@@ -82,7 +85,7 @@ io.on('connection', (socket) => {
 
   let randomMessages = () => {
     let msg = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 10; i++) {
       msg.push({
         text: `${randomWords({min:3, max: 10, join: ' '})}.`,
         name: `${chance.first()} ${chance.last()}`
