@@ -20,6 +20,7 @@ Able to add 10 million random users
 3. Part 1 integrated
   - go to /users/:query to make a query
   - go to /addData to add 10 million users
+  - go to /users to see total number of users
 
 #### Tools used:
 ```
