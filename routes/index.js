@@ -9,11 +9,10 @@ var server = http.Server(app);
 var io = require('socket.io')(server);
 var Chance = require('chance');
 var chance = new Chance();
-var randomWords = require('random-words');
 var User = require('../models/User');
+var randomWords = require('random-words');
 
 
-var history = [];
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -62,37 +61,36 @@ router.get('/users/:query', (req, res, next) => {
 
 router.get('/randomWords', (req, res) => res.send(randomWords(100)))
 
-router.get('/messages', (req, res) => res.send(history));
 
-io.on('connection', (socket) => {
-  socket.emit('history', history);
-  socket.on('newMessage', (message) => {
-    history.push(message);
-    io.emit('message', message);
-  });
-
-  setInterval(() => {
-    let newMessages = randomMessages();
-    history = history.concat(newMessages);
-    socket.emit('history', history)
-  }, 5000);
-
-  setInterval(() => {
-    history = [];
-  }, 30000);
-
-
-
-  let randomMessages = () => {
-    let msg = [];
-    for (let i = 0; i < 10; i++) {
-      msg.push({
-        text: `${randomWords({min:3, max: 10, join: ' '})}.`,
-        name: `${chance.first()} ${chance.last()}`
-      });
-    }
-    return msg;
-  }
-});
+// io.on('connection', (socket) => {
+//   socket.emit('history', history);
+//   socket.on('newMessage', (message) => {
+//     history.push(message);
+//     io.emit('message', message);
+//   });
+//
+//   setInterval(() => {
+//     let newMessages = randomMessages();
+//     history = history.concat(newMessages);
+//     socket.emit('history', history)
+//   }, 5000);
+//
+//   setInterval(() => {
+//     history = [];
+//   }, 30000);
+//
+//
+//
+//   let randomMessages = () => {
+//     let msg = [];
+//     for (let i = 0; i < 10; i++) {
+//       msg.push({
+//         text: `${randomWords({min:3, max: 10, join: ' '})}.`,
+//         name: `${chance.first()} ${chance.last()}`
+//       });
+//     }
+//     return msg;
+//   }
+// });
 
 module.exports = router;

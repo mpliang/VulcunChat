@@ -1,11 +1,56 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var socket_io = require('socket.io');
+var randomWords = require('random-words');
+var Chance = require('chance');
+var chance = new Chance();
 
 var app = express();
+
+var io = socket_io();
+app.io = io;
+
+var history = [];
+
+app.get('/messages', (req, res) => res.send(history));
+
+
+io.on('connection', (socket) => {
+  socket.emit('history', history);
+  socket.on('newMessage', (message) => {
+    history.push(message);
+    io.emit('message', message);
+  });
+
+  setInterval(() => {
+    let newMessages = randomMessages();
+    history = history.concat(newMessages);
+    socket.emit('history', history)
+  }, 5000);
+
+  setInterval(() => {
+    history = [];
+  }, 30000);
+
+
+
+  let randomMessages = () => {
+    let msg = [];
+    for (let i = 0; i < 10; i++) {
+      msg.push({
+        text: `${randomWords({min:3, max: 10, join: ' '})}.`,
+        name: `${chance.first()} ${chance.last()}`
+      });
+    }
+    return msg;
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

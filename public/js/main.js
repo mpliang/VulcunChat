@@ -23,11 +23,11 @@ app.factory('socket', (socketFactory) => {
     .then(data => {
         dictionary = data;
         console.log(dictionary);
-      }, err => console.log(error)) ;
+      }, err => console.log(err)) ;
 
   $.get("messages")
     .then( data => $scope.messages = data,
-    err => console.log(error) );
+    err => console.log(err) );
 
   swal({
     title: "Welcome to simple chat!",
