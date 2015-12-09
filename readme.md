@@ -10,7 +10,8 @@ View the app here: https://vulcun-chat.herokuapp.com/
 Multi-user chat hosted on Heroku
 Able to query entire database
 Sends 1000 random messages every 5 seconds
-Able to add 10 million random users
+Filters chat with 100 randomly selected words
+Able to add 10 million random users //times out right now, tried to do some async to split up the creating/inserting but couldnt get it to work.
 ```
 
 #### Updates
