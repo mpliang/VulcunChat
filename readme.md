@@ -3,6 +3,9 @@
 ## How to use
 ```
 View the app here: https://vulcun-chat.herokuapp.com/
+To run locally:
+  1. in public/js/main.js comment out the heroku link and uncomment the local link
+  2. npm install && nodemon
 ```
 #### Features
 
