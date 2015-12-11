@@ -16,28 +16,29 @@ var app = express();
 var io = socket_io();
 app.io = io;
 
-var history = [];
 
+//route to get all the messages
+var history = [];
 app.get('/messages', (req, res) => res.send(history));
 
-
+//socket.io logic
 io.on('connection', (socket) => {
   socket.emit('history', history);
   socket.on('newMessage', (message) => {
     history.push(message);
     io.emit('message', message);
   });
-
+  //on connection, this interval runs ever 5 seconds to deliver 1000 random messages
   setInterval(() => {
     let newMessages = randomMessages();
     history = history.concat(newMessages);
     socket.emit('history', history)
   }, 5000);
 
+  //this interval clears the history every 30 seconds to not clog memory
   setInterval(() => {
     history = [];
   }, 30000);
-
 
 
   let randomMessages = () => {

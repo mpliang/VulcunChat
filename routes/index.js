@@ -17,13 +17,17 @@ router.get('/', (req, res) => {
   res.render('index');
 });
 
+
+//sends the length of the db
 router.get('/users', (req, res) => {
-  User.find({}, (err, data) => {
-    console.log(data.length);
-    res.json(data.length);
+  User.count({}, (err, data) => {
+    console.log(data);
+    res.json(data);
   })
 });
 
+
+//adds 10 million users to db 50,000 at a time (200 times)
 router.get('/addData', (req, res, next) => {
   async.timesSeries(200, (n, next) => {
     console.log('n:', n);
@@ -47,7 +51,7 @@ router.get('/addData', (req, res, next) => {
   })
 });
 
-
+//query to search names in db
 router.get('/users/:query', (req, res, next) => {
   let regex = new RegExp(req.params.query, 'i')
   User.find({
@@ -58,38 +62,8 @@ router.get('/users/:query', (req, res, next) => {
   })
 });
 
+
+//route to get 100 random words
 router.get('/randomWords', (req, res) => res.send(randomWords(100)))
-
-
-// io.on('connection', (socket) => {
-//   socket.emit('history', history);
-//   socket.on('newMessage', (message) => {
-//     history.push(message);
-//     io.emit('message', message);
-//   });
-//
-//   setInterval(() => {
-//     let newMessages = randomMessages();
-//     history = history.concat(newMessages);
-//     socket.emit('history', history)
-//   }, 5000);
-//
-//   setInterval(() => {
-//     history = [];
-//   }, 30000);
-//
-//
-//
-//   let randomMessages = () => {
-//     let msg = [];
-//     for (let i = 0; i < 10; i++) {
-//       msg.push({
-//         text: `${randomWords({min:3, max: 10, join: ' '})}.`,
-//         name: `${chance.first()} ${chance.last()}`
-//       });
-//     }
-//     return msg;
-//   }
-// });
 
 module.exports = router;
