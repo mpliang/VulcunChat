@@ -29,29 +29,29 @@ io.on('connection', (socket) => {
     io.emit('message', message);
   });
   //on connection, this interval runs ever 5 seconds to deliver 1000 random messages
-  setInterval(() => {
-    let newMessages = randomMessages();
-    history = history.concat(newMessages);
-    socket.emit('history', history)
-  }, 5000);
+  // setInterval(() => {
+  //   let newMessages = randomMessages();
+  //   history = history.concat(newMessages);
+  //   socket.emit('history', history)
+  // }, 5000);
 
   //this interval clears the history every 30 seconds to not clog memory
-  setInterval(() => {
-    history = [];
-  }, 30000);
+  // setInterval(() => {
+  //   history = [];
+  // }, 30000);
 
 
-  let randomMessages = () => {
-    let msg = [];
-    for (let i = 0; i < 1000; i++) {
-      msg.push({
-        text: `${randomWords({min:3, max: 10, join: ' '})}.`,
-        name: `${chance.first()} ${chance.last()}`
-      });
-    }
-    return msg;
-  }
-});
+//   let randomMessages = () => {
+//     let msg = [];
+//     for (let i = 0; i < 1000; i++) {
+//       msg.push({
+//         text: `${randomWords({min:3, max: 10, join: ' '})}.`,
+//         name: `${chance.first()} ${chance.last()}`
+//       });
+//     }
+//     return msg;
+//   }
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
