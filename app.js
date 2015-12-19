@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
 //     }
 //     return msg;
 //   }
-// });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

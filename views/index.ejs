@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8">
     <title>simple chat app</title>
@@ -8,6 +9,7 @@
     <link href="/stylesheets/style.css" rel="stylesheet">
 
   </head>
+
   <body ng-app="chatApp" ng-controller="mainCtrl">
 
     <div class="chatApp">
@@ -20,9 +22,9 @@
           <li ng-repeat="message in messages track by $index" ng-cloak>
             <div class="view">
 
-                <span>
-                  <strong>{{message.name}}</strong>: {{message.text | censor}}
-                </span>
+              <span>
+                <strong>{{message.name}}</strong>: {{message.text | censor}}
+              </span>
 
             </div>
           </li>
@@ -36,6 +38,13 @@
       </div>
     </div>
 
+    <footer class="info">
+      <p>Created by Michael Liang</p>
+      <p>View Source Code on
+        <a href="https://github.com/mpliang/VulcunChat">GitHub</a>
+      </p>
+    </footer>
+
     <script src="vendor/jquery/dist/jquery.min.js"></script>
     <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendor/angular/angular.min.js"></script>
@@ -44,4 +53,5 @@
     <script src="vendor/angular-socket-io/socket.min.js"></script>
     <script src="js/main.js"></script>
   </body>
+
 </html>
