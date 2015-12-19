@@ -30,12 +30,12 @@
           </li>
         </ul>
       </section>
+      <div class="loading" ng-hide="messages.length > 0" ng-cloak>
+        Loading messages from the server, please wait...
+      </div>
       <form ng-submit="newMessage()">
         <input autofocus class="text" id="location" ng-model="message" placeholder="Enter a new message" type="text" autocomplete="off">
       </form>
-      <div class="loading" ng-hide="messages.length > 1" ng-cloak>
-        Loading messages from the server, please wait...
-      </div>
     </div>
 
     <footer class="info">

@@ -112,6 +112,7 @@ body {
   list-style: none;
   height: 400px;
   overflow: auto;
+  margin-bottom: 30px;
 }
 
 #message-list li {

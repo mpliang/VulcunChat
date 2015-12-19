@@ -25,7 +25,7 @@ app.factory('socket', (socketFactory) => {
         console.log(dictionary);
       }, err => console.log(err)) ;
 
-  $.get("messages")
+  $.get("/messages")
     .then( data => $scope.messages = data,
     err => console.log(err) );
 
