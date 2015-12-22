@@ -6,7 +6,7 @@ html, body {
 body {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4em;
-  background: #337AB7;
+  background: #4CAF50;
   color: #4d4d4d;
   min-width: 230px;
   max-width: 550px;
@@ -110,9 +110,9 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
-  height: 400px;
+  height: 320px;
   overflow: auto;
-  margin-bottom: 30px;
+  /*margin-bottom: 30px;*/
 }
 
 #message-list li {
@@ -126,13 +126,13 @@ body {
 }
 
 footer {
-  margin-left: auto;
-  margin-right: auto;
+  /*margin-left: auto;
+  margin-right: auto;*/
   background-color: #333;
   width: 100%;
   bottom: 0;
   position: fixed;
-  padding-top: 30px;
+  padding-top: 20px;
   padding-bottom: 20px;
   font-size: 10px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
