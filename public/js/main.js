@@ -1,8 +1,8 @@
 'use strict';
 
 
-// let url = 'https://vulcun-chat.herokuapp.com/';
-let url = 'http://localhost:3000'
+let url = 'https://vulcun-chat.herokuapp.com/';
+// let url = 'http://localhost:3000'
 
 let socket = io.connect(url);
 let app = angular.module('chatApp', ['btford.socket-io']);
